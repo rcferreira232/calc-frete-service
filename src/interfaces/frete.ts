@@ -1,5 +1,6 @@
 export type CalcFreteRequest = {
-  cep: string;
+  cep_origem: string;
+  cep_destino: string;
   peso: number;
   comprimento: number;
   altura: number;
