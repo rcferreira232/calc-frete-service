@@ -5,6 +5,8 @@ export type CalcFreteRequest = {
   comprimento: number;
   altura: number;
   largura: number;
+  valor_seguro: number;
+  quantidade: number;
 };
 
 export type CalcFreteResponse = {
