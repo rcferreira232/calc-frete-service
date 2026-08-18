@@ -16,6 +16,18 @@ export class FreteController {
     const data: CalcFreteRequest = req.body;
 
     try {
+      if (
+        !data.cep_origem ||
+        !data.cep_destino ||
+        !data.peso ||
+        !data.comprimento ||
+        !data.altura ||
+        !data.largura ||
+        !data.valor_seguro ||
+        !data.quantidade
+      ) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
       const result: CalcFreteResponse = await this.freteService.calcFrete(data);
       return res.status(200).json(result);
     } catch (error) {
