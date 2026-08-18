@@ -7,7 +7,7 @@ const router = Router();
 const freteService = new FreteService();
 const freteController = new FreteController(freteService);
 
-router.post("/calc-frete", async (req, res) => {
+router.post("/", async (req, res) => {
   return freteController.calcFrete(req, res);
 });
 
