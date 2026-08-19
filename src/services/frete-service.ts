@@ -44,16 +44,30 @@ export class FreteService {
     const melhorEnvioSuccesses = melhorEnvioResponse
       .filter((e) => !("error" in e))
       .map((e) => e as MelhorEnvioSuccessEntry);
-    
+
     if (!melhorEnvioSuccesses[0]) {
       throw new Error("No shipping options available");
     }
 
-    console.log(melhorEnvioResponse);
+    // Array is small, two sorts is fine
+    const cheapest = melhorEnvioSuccesses.sort(
+      (a, b) => Number(a.price) - Number(b.price),
+    )[0]!;
+    const fastest = melhorEnvioSuccesses.sort(
+      (a, b) => a.delivery_time - b.delivery_time,
+    )[0]!;
 
     return {
-      valor: parseFloat(melhorEnvioSuccesses[0].price),
-      prazoEntrega: melhorEnvioSuccesses[0].delivery_time,
+      barato: {
+        empresa: cheapest.company.name,
+        valor: parseFloat(cheapest.price),
+        prazoEntrega: cheapest.delivery_time,
+      },
+      rapido: {
+        empresa: fastest.company.name,
+        valor: parseFloat(fastest.price),
+        prazoEntrega: fastest.delivery_time,
+      },
     };
   }
 }

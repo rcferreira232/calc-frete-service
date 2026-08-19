@@ -9,7 +9,13 @@ export type CalcFreteRequest = {
   quantidade: number;
 };
 
-export type CalcFreteResponse = {
+type Frete = {
+  empresa: string;
   valor: number;
   prazoEntrega: number;
+}
+
+export type CalcFreteResponse = {
+  barato: Frete;
+  rapido: Frete;
 };
