@@ -16,7 +16,7 @@ export type MelhorEnvioRequest = {
   }[];
 };
 
-export type MelhorEnvioResponse = {
+export type MelhorEnvioSuccessEntry = {
   id: number;
   name: string;
   price: string;
@@ -60,3 +60,16 @@ export type MelhorEnvioResponse = {
     picture: string;
   };
 };
+
+export type MelhorEnvioErrorEntry = {
+  id: number;
+  name: string;
+  error: string;
+  company: {
+    id: number;
+    name: string;
+    picture: string;
+  };
+};
+
+export type MelhorEnvioResponse = Array<MelhorEnvioSuccessEntry | MelhorEnvioErrorEntry>;

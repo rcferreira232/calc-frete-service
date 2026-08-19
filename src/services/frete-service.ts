@@ -3,6 +3,7 @@ import { MelhorEnvioService } from "./external/melhor-envio-service.ts";
 import {
   MelhorEnvioRequest,
   MelhorEnvioResponse,
+  MelhorEnvioSuccessEntry,
 } from "../interfaces/melhor-envio.ts";
 
 export class FreteService {
@@ -38,16 +39,21 @@ export class FreteService {
       ],
     };
 
-    const melhorEnvioResponse: MelhorEnvioResponse[] =
+    const melhorEnvioResponse: MelhorEnvioResponse =
       await MelhorEnvioService.calcFrete(melhorEnvioRequest);
-
-    if (!melhorEnvioResponse[0]) {
+    const melhorEnvioSuccesses = melhorEnvioResponse
+      .filter((e) => !("error" in e))
+      .map((e) => e as MelhorEnvioSuccessEntry);
+    
+    if (!melhorEnvioSuccesses[0]) {
       throw new Error("No shipping options available");
     }
 
+    console.log(melhorEnvioResponse);
+
     return {
-      valor: parseFloat(melhorEnvioResponse[0].price),
-      prazoEntrega: melhorEnvioResponse[0].delivery_time,
+      valor: parseFloat(melhorEnvioSuccesses[0].price),
+      prazoEntrega: melhorEnvioSuccesses[0].delivery_time,
     };
   }
 }

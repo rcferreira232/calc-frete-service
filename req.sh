@@ -2,7 +2,7 @@ curl -Ss --json \
 '{
     "cep_origem": "96020360",
     "cep_destino": "01018020",
-    "peso": 10,
+    "peso": 100000,
     "comprimento": 11,
     "altura": 17,
     "largura": 11, 

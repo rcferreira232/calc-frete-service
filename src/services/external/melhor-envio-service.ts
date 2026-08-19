@@ -16,7 +16,7 @@ export class MelhorEnvioService {
 
   public static async calcFrete(
     data: MelhorEnvioRequest,
-  ): Promise<MelhorEnvioResponse[]> {
+  ): Promise<MelhorEnvioResponse> {
     const response = await fetch(
       `${MELHOR_ENVIO_URL}/api/v2/me/shipment/calculate`,
       {
@@ -30,6 +30,6 @@ export class MelhorEnvioService {
       throw new Error(`Error calculating shipping: ${response.statusText}`);
     }
 
-    return response.json() as Promise<MelhorEnvioResponse[]>;
+    return response.json() as Promise<MelhorEnvioResponse>;
   }
 }
